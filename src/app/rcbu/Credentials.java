@@ -29,6 +29,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import app.rcbu.AuthToken;
 public class Credentials extends Activity {
 
 	@Override
@@ -69,7 +70,6 @@ public class Credentials extends Activity {
 
             public void run() {
                 
-//                JSONObject json = new JSONObject();
 
                 try {
                 	Looper.prepare();
@@ -78,21 +78,16 @@ public class Credentials extends Activity {
                 	HttpConnectionParams.setSoTimeout(myParams, 10000);
                 	HttpConnectionParams.setConnectionTimeout(myParams, 10000);//For Preparing Message Pool for the child Thread
                     HttpClient client = new DefaultHttpClient(myParams);
-//                    HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000); //Timeout Limit
                     HttpResponse response;
                     HttpPost post = new HttpPost("https://identity.api.rackspacecloud.com/v2.0/tokens");
                     StringEntity se = new StringEntity(auth);  
                     se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
               
-//                    UsernamePasswordCredentials defaultcreds = new UsernamePasswordCredentials("username", "password");
-//                    UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(username,password);
-//                    client.getState().setCredentials(AuthScope.ANY, credentials);
+
                     post.setEntity(se);
                     response = client.execute(post,localContext);
                     Log.i("Response Status Code", response.getStatusLine().toString());
-//                    HttpEntity entity = response.getEntity();
-//                    response.getEntity().
-//                    Log.i("Response",response.getEntity().getContent().toString());
+
                     /*Checking response */
                     if(response!=null){
                         InputStream in = response.getEntity().getContent();
@@ -101,15 +96,11 @@ public class Credentials extends Activity {
                             BufferedReader reader = new BufferedReader(
                                     new InputStreamReader(in));
                             // do something useful with the response
-                            Log.i("Body",reader.readLine());
-//                            JSONObject response_body = new JSONObject(reader.readLine());
-//                            JSONObject response_access = new JSONObject();
-//                            JSONObject response_token = new JSONObject();
-//                            JSONObject response_id = new JSONObject();
-//                            response_access = (JSONObject) response_body.get("access");
-//                            response_token = (JSONObject) response_access.get("token");
-//                            response_id = (JSONObject) response_token.get("id");
-//                            Log.i("Body",response_body.toString());
+                            String resp = reader.readLine().substring(0, 60);
+//                            Log.i("Body",resp);
+                            String token = resp.substring(26, 58);
+                            Log.i("Body",token);
+                              AuthToken.authtoken = token;
                             
 
                         }
@@ -117,12 +108,12 @@ public class Credentials extends Activity {
                         {
                         	
                         }
-//                        Log.i("Response",in.toString());//Get the data in the entity
+
                     }
 
                 } catch(Exception e) {
                     e.printStackTrace();
-//                    onCreateDialog("Error", "Cannot Estabilish Connection");
+               
                 }
 
                 Looper.loop(); //Loop in the message queue
