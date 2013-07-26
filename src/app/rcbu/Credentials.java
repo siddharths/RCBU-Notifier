@@ -122,18 +122,18 @@ public class Credentials extends Activity {
 	                    String read = br.readLine();
 	                    while(read != null)
 	                    {
-	                    	JSONArray blah = new JSONArray(read);
+	                    	JSONArray Resp_array = new JSONArray(read);
 	                    	for (int i=0;i<5;i++)
 	                    	{
-	                    		JSONObject blah_blah = new JSONObject(blah.get(i).toString());
-	                    		if(!blah_blah.get("Type").toString().equalsIgnoreCase("Backup") && !blah_blah.get("CurrentState").toString().equalsIgnoreCase("Completed"))
+	                    		JSONObject Resp_obj = new JSONObject(Resp_obj.get(i).toString());
+	                    		if(!Resp_obj.get("Type").toString().equalsIgnoreCase("Backup") && !Resp_obj.get("CurrentState").toString().equalsIgnoreCase("Completed"))
 	                    				{
 	                    					continue;
 	                    				}
 	                    		else
 	                    		{
-	                    			All_resp.add("Source_Machine:" + blah_blah.get("SourceMachineName").toString());
-	                    			All_resp.add("Time of Activity:" + blah_blah.get("TimeOfActivity").toString());
+	                    			All_resp.add("Source_Machine:" + Resp_obj.get("SourceMachineName").toString());
+	                    			All_resp.add("Time of Activity:" + Resp_obj.get("TimeOfActivity").toString());
 	              
 	                    		}
 	                    	}
