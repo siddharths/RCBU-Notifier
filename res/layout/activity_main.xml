@@ -56,7 +56,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:ems="10"
-        android:inputType="numberPassword" />
+        android:inputType="textPassword" />
 
     <TextView
         android:id="@+id/textView3"
