@@ -73,10 +73,10 @@ public class Credentials extends Activity {
         Log.i("Request",auth.toString());
         sendJson(auth.toString(),message1,message2);
         TextView textView1 = new TextView(this);
-        textView1.setTextSize(10);
+//        textView1.setTextSize(10);
        
-        textView1.setText("Connection Established!");
-        setContentView(textView1);
+//        textView1.setText("Connection Established!");
+//        setContentView(textView1);
         try {
 			All_resp = get_user_activity();
 			for (int i=0;i<All_resp.size();i++)
@@ -104,7 +104,7 @@ public class Credentials extends Activity {
 	    	        HttpGet request = new HttpGet();
 	    	        request.setURI(new URI("http://curryord.drivesrvr.com/ORD,SYD,IAD,LON/v1.0/activity"));
 	    	        request.setHeader("Content-Type", "application/json");
-	    	        request.setHeader("X-Auth-Token", "8347f17f79124ccd96fe214bcb4817c6");
+	    	        request.setHeader("X-Auth-Token", AuthToken.authtoken);
 	    	        //request.setURI(new URI("https://www.google.com/"));
 	    	        System.out.println("Request built");
 	    	        response = client.execute(request);
